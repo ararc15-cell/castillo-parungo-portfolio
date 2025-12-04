@@ -11,25 +11,31 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
-
-
+# I-import ang dotenv kung gagamit ka ng .env file locally (RECOMMENDED)
+# Kung di mo gagamitin, i-delete ang dalawang linyang ito.
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# 1. FIX: Inalis ang typo sa _file_
+BASE_DIR = Path(_file_).resolve().parent.parent
 
-# 1. SECURITY FIX: Gamitin ang Environment Variable para sa SECRET_KEY
-# Ito ay para sa seguridad. Ilagay ito sa Render bilang Environment Variable.
-# Kung gagamit ka ng .env file locally, lalabas ito.
+# Quick-start development settings - unsuitable for production
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key')
 
-# 2. SECURITY FIX: I-set ang DEBUG sa False sa Production
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True' # Pwedeng i-override sa Render
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True' 
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
     'castillo-parungo-portfolio.onrender.com'
 ]
+
 
 # Application definition
 
@@ -40,12 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Idagdag ang iyong custom apps dito (e.g., 'myapp')
+    # 3. CRITICAL FIX: Ilagay ang pangalan ng app mo dito!
+    'myapp', 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 3. WHITENOISE FIX: Dapat nasa ilalim ng SecurityMiddleware ito!
+    # 2. WHITENOISE FIX: Dapat nasa ilalim ng SecurityMiddleware ito!
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,7 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,
+        'APP_DIRS': True, # Ibig sabihin, hahanapin ang templates sa loob ng app folder mo (e.g., myapp/templates/)
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -74,7 +81,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-# Database configuration (OK na ito)
+
+# Database
+# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -82,12 +92,45 @@ DATABASES = {
     }
 }
 
-# ... (Iba pang settings: Password Validation, I18N, TIME_ZONE, OK na) ...
 
-# 4. STATIC FILES FIX: Idagdag ang mga kailangan para sa Whitenoise sa Production
+# Password validation
+# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/6.0/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/6.0/howto/static-files/
+
 STATIC_URL = 'static/'
 
 # Folder kung saan mo inilalagay ang iyong static assets (CSS/Images)
+# Dapat mayroong main static folder sa root level: /portfolio/static/
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
