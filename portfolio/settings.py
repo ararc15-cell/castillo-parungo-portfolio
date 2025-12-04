@@ -17,7 +17,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # 1. FIX: Inalis ang typo sa file
-BASE_DIR = Path(_file_).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -126,7 +126,7 @@ STATIC_URL = '/static/'
 # Folder kung saan mo inilalagay ang iyong static assets (CSS/Images)
 # Dapat mayroong main static folder sa root level: /portfolio/static/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, ‘myapp’, 'static'),
+    os.path.join(BASE_DIR, 'myapp', 'static'),
 ]
 
 # Dito kokolektahin ni Django ang lahat ng static files (Kailangan ng Render!)
