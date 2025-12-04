@@ -16,19 +16,17 @@ from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# 1. FIX: Inalis ang typo sa _file_
-BASE_DIR = Path(__file__).resolve().parent.parent
+# 1. FIX: Inalis ang typo sa file
+BASE_DIR = Path(_file_).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True' 
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1', 
-    'localhost', 
     'castillo-parungo-portfolio.onrender.com'
 ]
 
@@ -123,12 +121,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Folder kung saan mo inilalagay ang iyong static assets (CSS/Images)
 # Dapat mayroong main static folder sa root level: /portfolio/static/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, ‘myapp’, 'static'),
 ]
 
 # Dito kokolektahin ni Django ang lahat ng static files (Kailangan ng Render!)
