@@ -9,28 +9,27 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 1. SECURITY FIX: Gamitin ang Environment Variable para sa SECRET_KEY
+# Ito ay para sa seguridad. Ilagay ito sa Render bilang Environment Variable.
+# Kung gagamit ka ng .env file locally, lalabas ito.
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-insecure-key')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zru)%hqe%^q4)ix99uy^+ulcun$6)s=eo@rzgzcl=()%!^#fgd'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 2. SECURITY FIX: I-set ang DEBUG sa False sa Production
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True' # Pwedeng i-override sa Render
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
     'castillo-parungo-portfolio.onrender.com'
 ]
-
 
 # Application definition
 
@@ -41,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Idagdag ang iyong custom apps dito (e.g., 'myapp')
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 3. WHITENOISE FIX: Dapat nasa ilalim ng SecurityMiddleware ito!
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,10 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
+# Database configuration (OK na ito)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,39 +82,18 @@ DATABASES = {
     }
 }
 
+# ... (Iba pang settings: Password Validation, I18N, TIME_ZONE, OK na) ...
 
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
+# 4. STATIC FILES FIX: Idagdag ang mga kailangan para sa Whitenoise sa Production
+STATIC_URL = 'static/'
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+# Folder kung saan mo inilalagay ang iyong static assets (CSS/Images)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
 
+# Dito kokolektahin ni Django ang lahat ng static files (Kailangan ng Render!)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
-STATIC_URL = 'static/'
+# Storage para sa caching at compression (Optimized for Whitenoise)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

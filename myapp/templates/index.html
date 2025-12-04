@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio ni Arar at Diego</title>
+    
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <a href="#home">A & D Developers</a>
+            </div>
+            <nav class="nav-links">
+                <a href="#about">About Us</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="profile-section container">
+        
+        <div class="profile-card">
+            <div class="photo-placeholder">PHOTO HERE</div>
+            <h2>Arar Castillo Jr.</h2>
+            <p class="tagline">"Future Full-Stack Developer | Passionate about Django"</p>
+            <p>Ito ang espasyo para sa maikling pagpapakilala ni Arar. Pwede mong ilagay dito ang iyong skills (Python, HTML, CSS), karanasan, at mga gusto mong matutunan.</p>
+            <p><strong>Skills:</strong> Python, Django (Basics), HTML, CSS</p>
+            <p><a href="mailto:arar@example.com">Email Arar</a></p>
+        </div>
+
+        <div class="profile-card">
+            <div class="photo-placeholder">PHOTO HERE</div>
+            <h2>Diego Parungo</h2>
+            <p class="tagline">"Aspiring Web Designer | UI/UX Enthusiast"</p>
+            <p>Ito ang espasyo para sa maikling pagpapakilala ni Diego. Dito mo ilalagay ang iyong mga paboritong tools, kung paano ka mag-design, at anong mga technology ang gusto mong gamitin.</p>
+            <p><strong>Skills:</strong> HTML, CSS, JavaScript (Basics), UI/UX Design</p>
+            <p><a href="mailto:diego@example.com">Email Diego</a></p>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2>💻 Aming Mga Proyekto (Projects)</h2>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <h3>Django Blog Site</h3>
+                    <p>Isang simpleng blog site na ginawa gamit ang Django framework. May kasamang user authentication at basic CRUD functionality.</p>
+                    <a href="#">Tingnan ang Proyekto (GitHub Link)</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Responsive Portfolio Design</h3>
+                    <p>Ang mismong portfolio na ito! Ginawa gamit lang ang malinis na HTML at CSS para patunayan ang galing sa front-end design.</p>
+                    <a href="#">Tingnan ang Source Code</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Future E-commerce Mockup</h3>
+                    <p>Isang static mockup ng isang online shop. Target na gawan ng dynamic functionality sa susunod na buwan.</p>
+                    <a href="#">Tingnan ang Live Demo</a>
+                </div>
+            </div>
+            <p style="margin-top: 30px;"><strong>(ADD MORE PROJECT CARDS AS YOU GO!)</strong></p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2025 A & D Developers Portfolio. | Ginawa gamit ang Puso at Code.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

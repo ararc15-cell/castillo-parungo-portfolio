@@ -1,0 +1,158 @@
+/* --- GLOBAL STYLES --- */
+:root {
+    --primary-color: #007bff; /* Kulay asul (Blue) */
+    --secondary-color: #6c757d; /* Kulay gray */
+    --bg-color: #f8f9fa; /* Background na light gray */
+    --text-color: #343a40; /* Dark text */
+    --font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- HEADER/NAVBAR STYLES --- */
+header {
+    background-color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* --- PROFILE SECTION STYLES --- */
+.profile-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Hatiin sa dalawa ang column */
+    gap: 40px;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.profile-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2 {
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+.profile-card .tagline {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.profile-card .photo-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    color: #666;
+    border: 3px solid var(--primary-color);
+}
+
+/* --- PROJECTS SECTION STYLES --- */
+.projects-section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.projects-section h2 {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+/* --- FOOTER STYLES --- */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #343a40;
+    color: white;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* --- RESPONSIVENESS (for Mobile) --- */
+@media (max-width: 768px) {
+    .profile-section {
+        grid-template-columns: 1fr; /* Magiging stack sa mobile */
+        gap: 20px;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+    .nav-links {
+        margin-top: 10px;
+    }
+    .nav-links a {
+        margin: 0 10px;
+    }
+}
