@@ -13,15 +13,11 @@ import os
 from pathlib import Path
 # I-import ang dotenv kung gagamit ka ng .env file locally (RECOMMENDED)
 # Kung di mo gagamitin, i-delete ang dalawang linyang ito.
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # 1. FIX: Inalis ang typo sa _file_
-BASE_DIR = Path(_file_).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # SECURITY WARNING: keep the secret key used in production secret!
